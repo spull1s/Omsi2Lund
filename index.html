@@ -76,4 +76,57 @@
 
     <header>
         <h1>🚌 LundaÅr</h1>
-        <p>
+        <p>Realtidsuppdateringar från OMSI 2-bygget</p>
+    </header>
+
+    <main id="feed">
+        <div class="loading">Laddar senaste uppdateringarna från Discord... ⏳</div>
+    </main>
+
+    <script>
+        // Byt ut mot din API/RSS-länk när backenden är uppe
+        const FEED_URL = 'https://omsidevloggapi.ts2tools.workers.dev'; 
+        
+        async function loadFeed() {
+            const feedContainer = document.getElementById('feed');
+            
+            try {
+                // Här väntar vi oss JSON, men strukturen kan anpassas beroende på backend
+                const response = await fetch(FEED_URL);
+                if (!response.ok) throw new Error('Nätverksfel');
+                const posts = await response.json(); 
+                
+                feedContainer.innerHTML = ''; // Rensa loading-texten
+
+                posts.forEach(post => {
+                    const postEl = document.createElement('article');
+                    postEl.className = 'post';
+                    
+                    // Formatera datumet snyggt
+                    const date = new Date(post.timestamp).toLocaleDateString('sv-SE', {
+                        year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
+                    });
+
+                    // Bygg upp HTML för inlägget
+                    let html = `<span class="post-date">${date}</span>`;
+                    html += `<div class="post-content">${post.content}</div>`;
+                    
+                    // Om det finns en bifogad bild/skärmdump från Discord
+                    if (post.image_url) {
+                        html += `<div class="post-media"><img src="${post.image_url}" alt="Screenshot"></div>`;
+                    }
+                    
+                    postEl.innerHTML = html;
+                    feedContainer.appendChild(postEl);
+                });
+
+            } catch (error) {
+                console.error(error);
+                feedContainer.innerHTML = '<div class="loading">Kunde inte ladda flödet just nu. 🚨</div>';
+            }
+        }
+
+         loadFeed(); // Avkommentera när du har URL:en
+    </script>
+</body>
+</html>
