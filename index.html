@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LundaÅr: OMSI 2 Devlogg</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
         :root {
             --bg: #121212;
@@ -70,6 +71,13 @@
             text-align: center;
             color: #888;
         }
+        .post-content a { 
+    color: var(--accent); 
+    text-decoration: none; 
+        }
+        .post-content a:hover { 
+    text-decoration: underline; 
+        }
     </style>
 </head>
 <body>
@@ -109,7 +117,7 @@
 
                     // Bygg upp HTML för inlägget
                     let html = `<span class="post-date">${date}</span>`;
-                    html += `<div class="post-content">${post.content}</div>`;
+                    html += `<div class="post-content">${marked.parse(post.content)}</div>`;
                     
                     // Om det finns en bifogad bild/skärmdump från Discord
                     if (post.image_url) {
