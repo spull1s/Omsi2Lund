@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LundaÅr: OMSI 2 Devlogg</title>
+    <style>
+        :root {
+            --bg: #121212;
+            --surface: #1e1e1e;
+            --text: #e0e0e0;
+            --accent: #22c55e; /* Skånetrafiken-grön */
+            --border: #333;
+        }
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        header {
+            text-align: center;
+            margin: 40px 0;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+            letter-spacing: -0.05em;
+        }
+        header p {
+            color: #888;
+            font-size: 1rem;
+        }
+        #feed {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+        .post {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--accent);
+            transition: transform 0.2s ease;
+        }
+        .post:hover {
+            transform: translateY(-2px);
+        }
+        .post-date {
+            font-size: 0.85rem;
+            color: #9ca3af;
+            margin-bottom: 12px;
+            display: block;
+        }
+        .post-content {
+            font-size: 1.05rem;
+            white-space: pre-wrap; /* Bevarar radbrytningar från Discord */
+        }
+        .post-media img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-top: 16px;
+            border: 1px solid var(--border);
+        }
+        .loading {
+            text-align: center;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>🚌 LundaÅr</h1>
+        <p>
